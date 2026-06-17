@@ -125,11 +125,13 @@ export default function StudentForm() {
                   className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:ring-2 focus:ring-[var(--color-dau-blue)] transition-all text-slate-800"
                 >
                   <option value="Auto">Let AI classify (Auto)</option>
-                  <option value="Wi-Fi / IT">Wi-Fi / IT</option>
-                  <option value="Hostel">Hostel Maintenance</option>
-                  <option value="Cafeteria">Cafeteria</option>
-                  <option value="Academics">Academics</option>
-                  <option value="Transport">Transport</option>
+                  <option value="Cafeteria Management">Cafeteria Management</option>
+                  <option value="Academic">Academic</option>
+                  <option value="Hostel Management">Hostel Management</option>
+                  <option value="Sports">Sports</option>
+                  <option value="Student Placement Cell">Student Placement Cell</option>
+                  <option value="Tech Support">Tech Support</option>
+                  <option value="Internal Complaints / Anti - Ragging">Internal Complaints / Anti - Ragging</option>
                   <option value="Other">Other</option>
                 </select>
               </div>
