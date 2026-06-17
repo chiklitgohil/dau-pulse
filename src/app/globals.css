@@ -1,0 +1,14 @@
+@import "tailwindcss";
+
+@theme {
+  --color-dau-blue: #263586;
+  --color-dau-yellow: #ffc20f;
+  --color-dau-orange: #f7941d;
+  --color-dau-red: #ee3f22;
+}
+
+@layer base {
+  body {
+    @apply bg-slate-50 text-slate-900 font-sans;
+  }
+}
