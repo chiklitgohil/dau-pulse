@@ -95,3 +95,14 @@ export async function resolveCluster(clusterId: string) {
   revalidatePath('/admin');
   revalidatePath(`/admin/clusters/${clusterId}`);
 }
+
+export async function clearDatabase() {
+  const db = await getDb();
+  db.issues = [];
+  db.clusters = [];
+  db.sessions = [];
+  db.processedMessageIds = [];
+  await saveDb(db);
+  revalidatePath('/admin');
+  revalidatePath('/');
+}

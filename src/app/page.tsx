@@ -1,19 +1,8 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { 
-  Send, 
-  Terminal, 
-  Layers, 
-  Smartphone, 
-  RefreshCw, 
-  Play, 
-  CheckCircle, 
-  ArrowRight,
-  Sparkles,
-  User,
-  MessageSquare
-} from 'lucide-react';
+import { Trash2, Smartphone, Send, LayoutDashboard, Settings, UserCircle, Bot, Zap, RefreshCw, Server } from 'lucide-react';
+import { clearDatabase } from './actions';
 import Link from 'next/link';
 
 interface ChatMessage {
@@ -146,9 +135,7 @@ export default function DeveloperSandbox() {
   const handleResetDb = async () => {
     if (!confirm('Are you sure you want to clear all database reports?')) return;
     try {
-      // Since db.json is cleared by writing to it, let's trigger a clean reload
-      // We can do this by submitting an empty/reset request or writing a reset action.
-      // But we already ran the database clear successfully! Let's just notify.
+      await clearDatabase();
       alert('Database issues cleared successfully!');
       setChatHistory([
         {
