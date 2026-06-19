@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { Trash2, Smartphone, Send, LayoutDashboard, Settings, UserCircle, Bot, Zap, RefreshCw, Server } from 'lucide-react';
+import { Trash2, Smartphone, Send, LayoutDashboard, Settings, UserCircle, Bot, Zap, RefreshCw, Server, ArrowRight, Terminal, Layers, Play, CheckCircle, Sparkles, User, MessageSquare } from 'lucide-react';
 import { clearDatabase } from './actions';
 import Link from 'next/link';
 
