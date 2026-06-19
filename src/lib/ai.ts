@@ -22,16 +22,16 @@ function fallbackAnalyze(description: string) {
   else if (lowerDesc.includes('food') || lowerDesc.includes('meal') || lowerDesc.includes('taste')) { category = 'Cafeteria Management'; subCategory = 'Food Quality'; }
   else if (lowerDesc.includes('clean') || lowerDesc.includes('hygiene') || lowerDesc.includes('dirty')) { category = 'Cafeteria Management'; subCategory = 'Hygiene'; }
   
-  // 3. Hostel Management
+  // 3. Academic (Checked BEFORE Hostel to catch "lecture in room")
+  else if (lowerDesc.includes('class') || lowerDesc.includes('lecture') || lowerDesc.includes('professor') || lowerDesc.includes('schedule') || lowerDesc.includes('timetable')) { category = 'Academic'; subCategory = 'Class/Lecture Issues'; }
+  else if (lowerDesc.includes('exam') || lowerDesc.includes('test') || lowerDesc.includes('quiz')) { category = 'Academic'; subCategory = 'Exam Conflicts'; }
+  else if (lowerDesc.includes('faculty') || lowerDesc.includes('teacher')) { category = 'Academic'; subCategory = 'Faculty Issues'; }
+
+  // 4. Hostel Management
   else if (lowerDesc.includes('water') || lowerDesc.includes('plumbing') || lowerDesc.includes('leak')) { category = 'Hostel Management'; subCategory = 'Water/Plumbing'; }
   else if (lowerDesc.includes('light') || lowerDesc.includes('power') || lowerDesc.includes('electricity')) { category = 'Hostel Management'; subCategory = 'Electricity'; }
-  else if (lowerDesc.includes('room') || lowerDesc.includes('bed') || lowerDesc.includes('fan')) { category = 'Hostel Management'; subCategory = 'Room Maintenance'; }
+  else if (lowerDesc.includes('hostel') || lowerDesc.includes('bed') || lowerDesc.includes('fan') || lowerDesc.includes('room')) { category = 'Hostel Management'; subCategory = 'Room Maintenance'; }
 
-  // 4. Academic
-  else if (lowerDesc.includes('class') || lowerDesc.includes('schedule') || lowerDesc.includes('timetable')) { category = 'Academic'; subCategory = 'Schedule Changes'; }
-  else if (lowerDesc.includes('exam') || lowerDesc.includes('test') || lowerDesc.includes('quiz')) { category = 'Academic'; subCategory = 'Exam Conflicts'; }
-  else if (lowerDesc.includes('faculty') || lowerDesc.includes('professor') || lowerDesc.includes('teacher')) { category = 'Academic'; subCategory = 'Faculty Issues'; }
-  
   // 5. Sports
   else if (lowerDesc.includes('sport') || lowerDesc.includes('ball') || lowerDesc.includes('bat')) { category = 'Sports'; subCategory = 'Equipment Damage'; }
   else if (lowerDesc.includes('ground') || lowerDesc.includes('court') || lowerDesc.includes('pitch')) { category = 'Sports'; subCategory = 'Ground Availability'; }
@@ -41,9 +41,9 @@ function fallbackAnalyze(description: string) {
   else if (lowerDesc.includes('interview') || lowerDesc.includes('company')) { category = 'Student Placement Cell'; subCategory = 'Interview Scheduling'; }
 
   // 7. Internal Complaints / Anti - Ragging
-  else if (lowerDesc.includes('harassment') || lowerDesc.includes('bully') || lowerDesc.includes('ragging')) { category = 'Internal Complaints / Anti - Ragging'; subCategory = 'Harassment'; }
+  else if (lowerDesc.includes('harass') || lowerDesc.includes('bully') || lowerDesc.includes('ragging') || lowerDesc.includes('senior')) { category = 'Internal Complaints / Anti - Ragging'; subCategory = 'Harassment'; }
   else if (lowerDesc.includes('fight') || lowerDesc.includes('dispute') || lowerDesc.includes('argue')) { category = 'Internal Complaints / Anti - Ragging'; subCategory = 'Peer Dispute'; }
-  else if (lowerDesc.includes('safe') || lowerDesc.includes('danger') || lowerDesc.includes('scared')) { category = 'Internal Complaints / Anti - Ragging'; subCategory = 'Safety Concern'; }
+  else if (lowerDesc.includes('safe') || lowerDesc.includes('danger') || lowerDesc.includes('scared') || lowerDesc.includes('security')) { category = 'Internal Complaints / Anti - Ragging'; subCategory = 'Safety Concern'; }
 
   // Location Extraction
   const locations = ['hostel a', 'hostel b', 'hostel c', 'main cafeteria', 'library', 'academic block', 'sports ground', 'main gate'];
