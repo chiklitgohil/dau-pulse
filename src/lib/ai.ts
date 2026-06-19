@@ -198,24 +198,28 @@ export async function processNewIssue(issue: Issue, dbIssues: Issue[], dbCluster
     }
 
     // 3. Check for matching indicators
-    const sameSpecificLocation = clusterHasLoc && issueHasLoc && cluster.location.toLowerCase() === issue.location.toLowerCase();
+    const exactlySameLocation = cluster.location.toLowerCase() === issue.location.toLowerCase();
+    const sameSpecificLocation = clusterHasLoc && issueHasLoc && exactlySameLocation;
     const sameSubCategory = cluster.subCategory && issue.subCategory && cluster.subCategory.toLowerCase() === issue.subCategory.toLowerCase();
 
     // Word/Keyword overlap check
     const cleanDesc = lowerDesc.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "");
-    const descWords = cleanDesc.split(/\s+/).filter(w => w.length > 4);
-    const stopWords = ['about', 'there', 'their', 'would', 'could', 'should', 'issue', 'problem', 'report', 'working', 'campus', 'under', 'please', 'thanks'];
+    const descWords = cleanDesc.split(/\s+/).filter(w => w.length >= 3);
+    const stopWords = ['about', 'there', 'their', 'would', 'could', 'should', 'issue', 'problem', 'report', 'working', 'campus', 'under', 'please', 'thanks', 'have', 'been', 'since', 'with', 'this', 'that', 'from', 'they', 'are', 'was', 'were', 'for', 'not', 'and', 'but', 'the'];
     const significantDescWords = descWords.filter(w => !stopWords.includes(w));
 
-    const clusterKeywords = cluster.title.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "").split(/\s+/).filter(w => w.length > 4 && !stopWords.includes(w));
-    const hasWordOverlap = significantDescWords.some(w => clusterKeywords.includes(w));
+    const clusterKeywords = cluster.title.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "").split(/\s+/).filter(w => w.length >= 3 && !stopWords.includes(w));
+    const clusterSummaryKeywords = cluster.summary.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "").split(/\s+/).filter(w => w.length >= 3 && !stopWords.includes(w));
+    const allClusterKeywords = [...new Set([...clusterKeywords, ...clusterSummaryKeywords])];
+    
+    const hasWordOverlap = significantDescWords.some(w => allClusterKeywords.includes(w));
 
     // Match if:
-    // A: Same specific location AND same subCategory
-    // B: Same specific location AND description keyword overlap
+    // A: Exact same location (even Pending/Not Applicable) AND same subCategory
+    // B: Same physical location AND description keyword overlap
     // C: One location is pending, but same subCategory AND description word overlap
     if (
-      (sameSpecificLocation && sameSubCategory) ||
+      (exactlySameLocation && sameSubCategory) ||
       (sameSpecificLocation && hasWordOverlap) ||
       ((!clusterHasLoc || !issueHasLoc) && sameSubCategory && hasWordOverlap)
     ) {
@@ -244,9 +248,13 @@ export async function processNewIssue(issue: Issue, dbIssues: Issue[], dbCluster
 
     cluster.summary = `Multiple students reported issues related to ${cluster.title}. The latest report mentions: "${issue.description.substring(0, 50)}..."`;
   } else {
+    const isOnline = issue.location === 'Not Applicable';
+    const locationForTitle = (issue.location === 'Location Pending' || issue.location === 'Not specified' || issue.location === 'WhatsApp Reported') ? 'Campus' : issue.location;
+    const title = isOnline ? `${issue.subCategory || issue.category} Issue` : `${issue.subCategory || issue.category} Issue in ${locationForTitle}`;
+
     const newCluster: Cluster = {
       id: `CLU-${Date.now()}`,
-      title: `${issue.subCategory || issue.category} Issue in ${issue.location !== 'Location Pending' ? issue.location : 'Campus'}`,
+      title,
       category: issue.category,
       subCategory: issue.subCategory,
       location: issue.location,
