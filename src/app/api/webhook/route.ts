@@ -130,6 +130,6 @@ export async function POST(request: Request) {
     return NextResponse.json({ status: 'OK', reply: 'No messages received.' });
   } catch (error) {
     console.error('Error handling webhook:', error);
-    return new NextResponse('Internal Server Error', { status: 500 });
+    return new NextResponse(error instanceof Error ? error.stack : String(error), { status: 500 });
   }
 }
