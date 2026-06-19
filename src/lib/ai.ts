@@ -109,7 +109,19 @@ export async function analyzeIssueWithLLM(description: string) {
       required: ['category', 'subCategory', 'location', 'urgency']
     };
 
-    const prompt = `You are DAU Pulse AI, a campus intelligence engine. Analyze the following student issue report and categorize it strictly according to the schema provided.\n\nReport: "${description}"`;
+    const prompt = `You are DAU Pulse AI, a campus intelligence engine. Analyze the following student issue report and categorize it strictly according to the schema provided.
+
+Category Definitions:
+- Academic: Issues related to classes, lectures, professors, exams, syllabus, or academic rooms/classrooms (e.g., "Professor didn't show up", "Lecture in Room 402").
+- Internal Complaints / Anti - Ragging: Serious issues involving harassment, bullying, fighting, threats, or ragging by seniors/peers.
+- Hostel Management: Issues specific to student dormitories and living quarters (e.g., plumbing, beds, hostel room maintenance). DO NOT use for classrooms.
+- Cafeteria Management: Issues related to food quality, dining hygiene, or meal plans.
+- Sports: Issues regarding sports equipment, courts, grounds, or matches.
+- Student Placement Cell: Issues about internships, jobs, or company interviews.
+- Tech Support: IT issues like Wi-Fi outages, portal login problems, or lab computers.
+- Other: General inquiries that do not fit the above.
+
+Report: "${description}"`;
 
     const response = await ai.models.generateContent({
       model: 'gemini-2.5-flash',
