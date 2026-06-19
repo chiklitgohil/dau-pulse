@@ -38,6 +38,19 @@ export async function POST(request: Request) {
 
           const db = await getDb();
           
+          // IDEMPOTENCY: Ignore Meta retries
+          const messageId = message.id;
+          if (messageId) {
+            db.processedMessageIds = db.processedMessageIds || [];
+            if (db.processedMessageIds.includes(messageId)) {
+              console.log(`Ignoring duplicate webhook for message: ${messageId}`);
+              return NextResponse.json({ status: 'OK', reply: 'Duplicate ignored' });
+            }
+            db.processedMessageIds.push(messageId);
+            if (db.processedMessageIds.length > 500) db.processedMessageIds.shift();
+            await saveDb(db); // Save immediately so retries see it
+          }
+          
           // Check if user has an active session
           let session = db.sessions.find(s => s.phoneId === fromPhone);
           

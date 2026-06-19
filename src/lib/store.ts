@@ -50,6 +50,7 @@ export interface Database {
   issues: Issue[];
   clusters: Cluster[];
   sessions: UserSession[];
+  processedMessageIds?: string[];
 }
 
 
@@ -122,6 +123,7 @@ export async function getDb(): Promise<Database> {
       db.issues = db.issues || [];
       db.clusters = db.clusters || [];
       db.sessions = db.sessions || [];
+      db.processedMessageIds = db.processedMessageIds || [];
       return db;
     }
   } catch (error) {
