@@ -14,7 +14,7 @@ export async function submitIssue(formData: FormData) {
     throw new Error('Description is required');
   }
 
-  const db = getDb();
+  const db = await getDb();
   
   const newIssue: Issue = {
     id: `ISS-${Date.now()}`,
@@ -32,7 +32,7 @@ export async function submitIssue(formData: FormData) {
   db.issues = updatedIssues;
   db.clusters = updatedClusters;
   
-  saveDb(db);
+  await saveDb(db);
   
   revalidatePath('/admin');
   
@@ -40,7 +40,7 @@ export async function submitIssue(formData: FormData) {
 }
 
 export async function getDashboardData() {
-  const db = getDb();
+  const db = await getDb();
   return {
     issues: db.issues,
     clusters: db.clusters
@@ -48,11 +48,11 @@ export async function getDashboardData() {
 }
 
 export async function updateIssueStatus(issueId: string, status: any) {
-  const db = getDb();
+  const db = await getDb();
   const issue = db.issues.find(i => i.id === issueId);
   if (issue) {
     issue.status = status;
-    saveDb(db);
+    await saveDb(db);
     revalidatePath('/admin');
   }
 }

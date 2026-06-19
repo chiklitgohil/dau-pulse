@@ -1,5 +1,4 @@
-import fs from 'fs';
-import path from 'path';
+import { kv } from '@vercel/kv';
 
 export type CommitteeCategory = 
   | 'Cafeteria Management' 
@@ -53,7 +52,6 @@ export interface Database {
   sessions: UserSession[];
 }
 
-const dbPath = path.join(process.cwd(), 'src/lib/db.json');
 
 const defaultDb: Database = {
   issues: [
@@ -117,15 +115,25 @@ const defaultDb: Database = {
   sessions: []
 };
 
-export function getDb(): Database {
-  if (!fs.existsSync(dbPath)) {
-    fs.writeFileSync(dbPath, JSON.stringify(defaultDb, null, 2));
-    return defaultDb;
+export async function getDb(): Promise<Database> {
+  try {
+    const db = await kv.get<Database>('dau_pulse_db');
+    if (db) {
+      db.issues = db.issues || [];
+      db.clusters = db.clusters || [];
+      db.sessions = db.sessions || [];
+      return db;
+    }
+  } catch (error) {
+    console.error("KV getDb error:", error);
   }
-  const data = fs.readFileSync(dbPath, 'utf-8');
-  return JSON.parse(data);
+  return defaultDb;
 }
 
-export function saveDb(db: Database) {
-  fs.writeFileSync(dbPath, JSON.stringify(db, null, 2));
+export async function saveDb(db: Database) {
+  try {
+    await kv.set('dau_pulse_db', db);
+  } catch (error) {
+    console.error("KV saveDb error:", error);
+  }
 }

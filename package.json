@@ -23,6 +23,7 @@
   "homepage": "https://github.com/chiklitgohil/dau-pulse#readme",
   "dependencies": {
     "@google/genai": "^2.8.0",
+    "@vercel/kv": "^3.0.0",
     "lucide-react": "^1.20.0",
     "next": "^16.2.9",
     "react": "^19.2.7",

@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { getDb, saveDb, Issue, UserSession } from '@/lib/store';
+import { getDb, saveDb, Issue } from '@/lib/store';
 import { processNewIssue, extractLocation } from '@/lib/ai';
 import { sendWhatsAppMessage } from '@/lib/whatsapp';
 
@@ -36,7 +36,7 @@ export async function POST(request: Request) {
           const textBody = message.text.body;
           const senderName = contactInfo?.profile?.name || fromPhone;
 
-          const db = getDb();
+          const db = await getDb();
           
           // Check if user has an active session
           let session = db.sessions.find(s => s.phoneId === fromPhone);
@@ -57,10 +57,11 @@ export async function POST(request: Request) {
 
               // Clear session
               db.sessions = db.sessions.filter(s => s.phoneId !== fromPhone);
-              saveDb(db);
+              await saveDb(db);
 
-              await sendWhatsAppMessage(fromPhone, `Got it! We have updated your ticket (${pendingIssue.id}) with location: ${pendingIssue.location}. Your issue is fully logged.`);
-              return new NextResponse('OK', { status: 200 });
+              const updateReply = `Got it! We have updated your ticket (${pendingIssue.id}) with location: ${pendingIssue.location}. Your issue is fully logged.`;
+              await sendWhatsAppMessage(fromPhone, updateReply);
+              return NextResponse.json({ status: 'OK', reply: updateReply });
             }
           }
 
@@ -97,22 +98,23 @@ export async function POST(request: Request) {
                 lastInteraction: new Date().toISOString()
               });
             }
-            saveDb(db);
+            await saveDb(db);
 
             const promptText = `We've categorized your issue under ${savedIssue.category} (${savedIssue.subCategory}).\n\nTo help us route it to the right team, could you please reply with your specific location on campus? (e.g., Hostel B, Main Cafeteria)`;
             await sendWhatsAppMessage(fromPhone, promptText);
-            return new NextResponse('OK', { status: 200 });
+            return NextResponse.json({ status: 'OK', reply: promptText });
           }
 
           // Complete with location
-          saveDb(db);
+          await saveDb(db);
           const replyText = `Thanks for reporting this to DAU Pulse.\n\nTicket ID: ${savedIssue?.id}\nCategory: ${savedIssue?.category} (${savedIssue?.subCategory})\nLocation: ${savedIssue?.location}\nUrgency: ${savedIssue?.urgency}/5\n\nWe have logged this issue for campus administrators.`;
           await sendWhatsAppMessage(fromPhone, replyText);
+          return NextResponse.json({ status: 'OK', reply: replyText });
         }
       }
     }
 
-    return new NextResponse('OK', { status: 200 });
+    return NextResponse.json({ status: 'OK', reply: 'No messages received.' });
   } catch (error) {
     console.error('Error handling webhook:', error);
     return new NextResponse('Internal Server Error', { status: 500 });
