@@ -21,9 +21,11 @@ export async function sendWhatsAppMessage(toPhone: string, messageText: string) 
       },
       body: JSON.stringify({
         messaging_product: 'whatsapp',
+        recipient_type: 'individual',
         to: toPhone,
         type: 'text',
         text: {
+          preview_url: false,
           body: messageText
         }
       })
