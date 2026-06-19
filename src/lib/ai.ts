@@ -99,7 +99,7 @@ export async function analyzeIssueWithLLM(description: string) {
         },
         location: {
           type: Type.STRING,
-          description: "The location of the issue mentioned in the text. Must return exactly 'Location Pending' if NO specific location is mentioned."
+          description: "The location of the issue mentioned in the text. Return exactly 'Location Pending' if a physical location is needed but not mentioned. Return exactly 'Not Applicable' if the issue type does not require a physical location (e.g., portal login, online schedule changes, internship queries)."
         },
         urgency: {
           type: Type.INTEGER,
@@ -163,6 +163,18 @@ export async function processNewIssue(issue: Issue, dbIssues: Issue[], dbCluster
     if (!issue.urgency || issue.urgency === 0) {
       issue.urgency = analysis.urgency;
     }
+
+    if (issue.location === 'Location Pending') {
+      const locationNotRequired = 
+        issue.category === 'Student Placement Cell' ||
+        issue.category === 'Academic' ||
+        (issue.category === 'Tech Support' && issue.subCategory === 'Portal Login Issues') ||
+        (issue.category === 'Other' && issue.subCategory === 'General Inquiry');
+        
+      if (locationNotRequired) {
+        issue.location = 'Not Applicable';
+      }
+    }
   }
 
   // 2. Clustering Logic
@@ -176,8 +188,8 @@ export async function processNewIssue(issue: Issue, dbIssues: Issue[], dbCluster
     }
 
     // 2. Location strict check: If both have specific locations, they must match
-    const clusterHasLoc = cluster.location && cluster.location !== 'Location Pending' && cluster.location !== 'Not specified' && cluster.location !== 'WhatsApp Reported';
-    const issueHasLoc = issue.location && issue.location !== 'Location Pending' && issue.location !== 'Not specified' && issue.location !== 'WhatsApp Reported';
+    const clusterHasLoc = cluster.location && cluster.location !== 'Location Pending' && cluster.location !== 'Not specified' && cluster.location !== 'WhatsApp Reported' && cluster.location !== 'Not Applicable';
+    const issueHasLoc = issue.location && issue.location !== 'Location Pending' && issue.location !== 'Not specified' && issue.location !== 'WhatsApp Reported' && issue.location !== 'Not Applicable';
 
     if (clusterHasLoc && issueHasLoc) {
       if (cluster.location.toLowerCase() !== issue.location.toLowerCase()) {

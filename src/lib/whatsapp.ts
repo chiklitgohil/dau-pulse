@@ -10,7 +10,7 @@ export async function sendWhatsAppMessage(toPhone: string, messageText: string) 
     return { success: true, simulated: true };
   }
 
-  const url = `https://graph.facebook.com/v17.0/${phoneNumberId}/messages`;
+  const url = `https://graph.facebook.com/v25.0/${phoneNumberId}/messages`;
   
   try {
     const response = await fetch(url, {
