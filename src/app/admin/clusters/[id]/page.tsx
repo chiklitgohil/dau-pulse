@@ -52,7 +52,7 @@ export default async function ClusterDetail({ params }: { params: Promise<{ id: 
                 </div>
               ) : (
                 <form action={resolveCluster.bind(null, cluster.id)}>
-                  <button type="submit" className="bg-[var(--color-dau-yellow)] hover:bg-yellow-400 text-slate-900 px-6 py-3 rounded-xl font-bold shadow-lg transition-colors flex items-center gap-2">
+                  <button type="submit" style={{ cursor: 'pointer' }} className="cursor-pointer bg-[var(--color-dau-yellow)] hover:bg-yellow-400 text-slate-900 px-6 py-3 rounded-xl font-bold shadow-lg transition-colors flex items-center gap-2">
                     <CheckCircle2 className="w-5 h-5" />
                     Mark Resolved
                   </button>

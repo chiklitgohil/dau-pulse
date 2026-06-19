@@ -19,7 +19,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           <div className="flex items-center gap-4">
             <Link href="/" className="flex items-center gap-2 hover:bg-slate-800 text-slate-300 px-3 py-1.5 rounded-lg transition-colors text-sm">
               <Home className="w-4 h-4" />
-              <span>Student View</span>
+              <span>Developer Testing</span>
             </Link>
             <div className="h-6 w-px bg-slate-800"></div>
             <Link href="/" className="flex items-center gap-2 hover:bg-slate-800 text-slate-300 px-3 py-1.5 rounded-lg transition-colors text-sm">
