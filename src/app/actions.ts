@@ -2,6 +2,7 @@
 
 import { getDb, saveDb, Issue } from '@/lib/store';
 import { processNewIssue } from '@/lib/ai';
+import { sendWhatsAppMessage } from '@/lib/whatsapp';
 import { revalidatePath } from 'next/cache';
 
 export async function submitIssue(formData: FormData) {
@@ -55,4 +56,42 @@ export async function updateIssueStatus(issueId: string, status: any) {
     await saveDb(db);
     revalidatePath('/admin');
   }
+}
+
+export async function resolveCluster(clusterId: string) {
+  const db = await getDb();
+  const cluster = db.clusters.find(c => c.id === clusterId);
+  
+  if (!cluster) return;
+
+  cluster.status = 'Resolved';
+  
+  const resolvedIssuePhones = new Set<string>();
+
+  for (const issueId of cluster.issueIds) {
+    const issue = db.issues.find(i => i.id === issueId);
+    if (issue) {
+      issue.status = 'Resolved';
+      if (issue.phone) {
+        resolvedIssuePhones.add(issue.phone);
+      }
+    }
+  }
+
+  await saveDb(db);
+
+  // Send WhatsApp messages asynchronously
+  for (const phone of resolvedIssuePhones) {
+    try {
+      await sendWhatsAppMessage(
+        phone, 
+        `✅ Good news! The issue you reported regarding "${cluster.title}" has been marked as Resolved by the campus administration.`
+      );
+    } catch (e) {
+      console.error('Failed to notify user about resolution:', e);
+    }
+  }
+
+  revalidatePath('/admin');
+  revalidatePath(`/admin/clusters/${clusterId}`);
 }

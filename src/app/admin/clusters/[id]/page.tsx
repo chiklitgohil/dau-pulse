@@ -1,4 +1,4 @@
-import { getDashboardData } from '@/app/actions';
+import { getDashboardData, resolveCluster } from '@/app/actions';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { ArrowLeft, CheckCircle2, ShieldAlert, Zap, Building, Users } from 'lucide-react';
@@ -45,10 +45,19 @@ export default async function ClusterDetail({ params }: { params: Promise<{ id: 
             </div>
             
             <div className="flex-shrink-0">
-              <button className="bg-[var(--color-dau-yellow)] hover:bg-yellow-400 text-slate-900 px-6 py-3 rounded-xl font-bold shadow-lg transition-colors flex items-center gap-2">
-                <CheckCircle2 className="w-5 h-5" />
-                Mark Resolved
-              </button>
+              {cluster.status === 'Resolved' ? (
+                <div className="bg-green-500/20 text-green-200 border border-green-500/30 px-6 py-3 rounded-xl font-bold flex items-center gap-2">
+                  <CheckCircle2 className="w-5 h-5" />
+                  Resolved
+                </div>
+              ) : (
+                <form action={resolveCluster.bind(null, cluster.id)}>
+                  <button type="submit" className="bg-[var(--color-dau-yellow)] hover:bg-yellow-400 text-slate-900 px-6 py-3 rounded-xl font-bold shadow-lg transition-colors flex items-center gap-2">
+                    <CheckCircle2 className="w-5 h-5" />
+                    Mark Resolved
+                  </button>
+                </form>
+              )}
             </div>
           </div>
         </div>

@@ -19,6 +19,7 @@ export interface Issue {
   urgency: number;
   status: 'New' | 'In Review' | 'In Progress' | 'Resolved' | 'Closed';
   contact: string;
+  phone?: string;
   createdAt: string;
   clusterId?: string;
 }

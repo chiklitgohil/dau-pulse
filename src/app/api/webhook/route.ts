@@ -87,6 +87,7 @@ export async function POST(request: Request) {
             urgency: 0,
             status: 'New',
             contact: senderName,
+            phone: fromPhone,
             createdAt: new Date().toISOString()
           };
 
