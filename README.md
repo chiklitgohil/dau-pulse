@@ -8,11 +8,24 @@
 DAU Pulse transforms chaotic, scattered student complaints into structured, actionable campus intelligence. By integrating directly into WhatsApp—the app every student already uses—we remove the friction of reporting issues. Our AI layer automatically clusters similar complaints, extracts locations, and assigns urgency scores, allowing campus administrators to resolve critical problems faster.
 
 ## 🚀 Key Features
+
 - **WhatsApp Integration**: Zero-app-install reporting system. Students just send a message.
 - **AI Triage (Gemini 2.5 Flash)**: Automatically categorizes text into departments (Academic, Hostel, Tech Support, etc.).
 - **Smart Clustering**: Groups identical reports (e.g., 5 students reporting the same broken Wi-Fi router) to prevent admin fatigue.
 - **Urgency Scoring**: Detects keywords like "harassment" or "pipe burst" and flags them with high urgency.
 - **Admin Dashboard**: A sleek, real-time command center for administrators to view, track, and resolve issues.
+
+---
+
+## 📸 App Previews
+
+### Admin Dashboard (AI Clustering in Action)
+
+![Admin Dashboard](./assets/dashboard.png)
+
+### Student Experience (WhatsApp Bot)
+
+![WhatsApp Integration](./assets/whatsapp-chat.png)
 
 ---
 
@@ -31,18 +44,21 @@ As part of the Buildathon requirements, here is the full disclosure of tools, mo
 ## 📦 Running Locally
 
 1. **Clone the repository**
+
    ```bash
    git clone <repo-url>
    cd dau-pulse
    ```
 
 2. **Install dependencies**
+
    ```bash
    npm install
    ```
 
 3. **Set up Environment Variables**
    Create a `.env` file in the root directory:
+
    ```env
    # Database (Vercel KV)
    KV_REST_API_URL=your_upstash_url
@@ -66,6 +82,7 @@ As part of the Buildathon requirements, here is the full disclosure of tools, mo
 ---
 
 ## 📂 Project Structure
+
 - `src/app/api/webhook/route.ts`: Core WhatsApp webhook receiver and processing pipeline.
 - `src/lib/ai.ts`: Gemini LLM prompt engineering and clustering logic.
 - `src/app/admin/page.tsx`: Administrator dashboard UI.
