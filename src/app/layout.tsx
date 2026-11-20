@@ -1,25 +1,24 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
+import { Inter } from 'next/font/google';
+import { Header } from '@/components/Header';
 import './globals.css';
 
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' });
+
 export const metadata: Metadata = {
-  title: 'DAU Pulse',
-  description: 'AI Campus Issue Intelligence Platform',
+  title: { default: 'DAU Pulse', template: '%s · DAU Pulse' },
+  description: 'Report campus problems, see what is being fixed, and get told when it is done.',
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export const viewport: Viewport = { themeColor: '#263586', width: 'device-width', initialScale: 1 };
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <head>
-        {/* Inter font from Google Fonts */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-      </head>
-      <body>{children}</body>
+    <html lang="en" className={inter.variable}>
+      <body className="min-h-screen font-sans">
+        <Header />
+        <main className="mx-auto w-full max-w-6xl px-4 py-6 sm:px-6 sm:py-8">{children}</main>
+      </body>
     </html>
   );
 }

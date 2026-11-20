@@ -1,14 +1,60 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
-  --color-dau-blue: #263586;
-  --color-dau-yellow: #ffc20f;
-  --color-dau-orange: #f7941d;
-  --color-dau-red: #ee3f22;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  /* DAU brand */
+  --color-brand-50: #eef0fb;
+  --color-brand-100: #dfe3f6;
+  --color-brand-200: #c0c8ee;
+  --color-brand-500: #3e4fb0;
+  --color-brand-600: #2f3f9c;
+  --color-brand-700: #263586;
+  --color-brand-800: #1e2a6b;
+  --color-brand-900: #161f4f;
+  --color-accent: #ffc20f;
+  --color-accent-dark: #f7941d;
 }
 
 @layer base {
   body {
-    @apply bg-slate-50 text-slate-900 font-sans;
+    @apply bg-slate-50 text-slate-900 antialiased;
   }
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-brand-500;
+  }
+}
+
+@utility btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold transition-colors disabled:cursor-not-allowed disabled:opacity-50;
+}
+@utility btn-primary {
+  @apply btn bg-brand-700 text-white hover:bg-brand-800;
+}
+@utility btn-secondary {
+  @apply btn border border-slate-300 bg-white text-slate-800 hover:bg-slate-50;
+}
+@utility btn-ghost {
+  @apply btn text-slate-700 hover:bg-slate-100;
+}
+@utility btn-danger {
+  @apply btn bg-rose-600 text-white hover:bg-rose-700;
+}
+@utility btn-sm {
+  @apply px-3 py-1.5 text-xs;
+}
+@utility card {
+  @apply rounded-xl border border-slate-200 bg-white shadow-sm;
+}
+@utility input {
+  @apply block w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-200 focus:outline-none disabled:bg-slate-100;
+}
+@utility label {
+  @apply mb-1 block text-sm font-medium text-slate-700;
+}
+@utility hint {
+  @apply mt-1 text-xs text-slate-500;
+}
+@utility page-title {
+  @apply text-2xl font-bold tracking-tight text-slate-900;
 }

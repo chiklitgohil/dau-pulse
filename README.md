@@ -1,90 +1,84 @@
-# DAU Pulse 🎓⚡
+# DAU Pulse
 
-> **AI-Powered Campus Intelligence via WhatsApp**
+Campus issue reporting for Dhirubhai Ambani University. Students describe a problem in their own words. DAU Pulse sends it to the team that fixes it, groups it with reports from other students, gives it an owner and a deadline, and emails everyone who reported it when it's done.
 
-**Public Deployment Link**: [https://dau-pulse.vercel.app/](https://dau-pulse.vercel.app/)
-**GitHub Repository**: [https://github.com/chiklitgohil/dau-pulse](https://github.com/chiklitgohil/dau-pulse)
+> v2 is a rebuild of the buildathon prototype (`main`, live at dau-pulse.vercel.app). The prototype stored everything in one Redis key, had no login, and merged duplicates silently with keyword rules. See [docs/ProjectDocumentation.md](docs/ProjectDocumentation.md) for what changed and why.
 
-DAU Pulse transforms chaotic, scattered student complaints into structured, actionable campus intelligence. By integrating directly into WhatsApp—the app every student already uses—we remove the friction of reporting issues. Our AI layer automatically clusters similar complaints, extracts locations, and assigns urgency scores, allowing campus administrators to resolve critical problems faster.
+## What it does
 
-## 🚀 Key Features
+**Students** (Google sign-in, college accounts only)
+- Write the problem in any language (English, Hinglish, Gujarati). The AI fills in the category and place, and the student confirms or changes them.
+- See similar open issues and tap **"Yes, same problem"** instead of filing a duplicate. More reporters means higher priority.
+- Ragging, harassment and other sensitive reports go **only** to the Grievance & Anti-Ragging Committee. These are never on the public board and admins can't see them. A keyword check runs alongside the AI, and crisis language shows the Tele-MANAS helpline straight away.
+- Can hide their name from staff, or keep a report off the public board.
+- Track everything under **My reports**, and get emailed on every status change.
 
-- **WhatsApp Integration**: Zero-app-install reporting system. Students just send a message.
-- **AI Triage (Gemini 2.5 Flash)**: Automatically categorizes text into departments (Academic, Hostel, Tech Support, etc.).
-- **Smart Clustering**: Groups identical reports (e.g., 5 students reporting the same broken Wi-Fi router) to prevent admin fatigue.
-- **Urgency Scoring**: Detects keywords like "harassment" or "pipe burst" and flags them with high urgency.
-- **Admin Dashboard**: A sleek, real-time command center for administrators to view, track, and resolve issues.
+**Staff** (one team each)
+- A queue for their team, sorted by urgency and deadline, with views for "assigned to me", overdue, and search.
+- On each issue they can change status (a note is required to resolve or close, and every reporter is emailed), assign it, add internal notes, reclassify or mark it sensitive, and merge duplicates.
+- A daily email digest per team. Overdue issues are escalated to admins automatically.
 
----
+**Admins**: a triage queue for low-confidence AI guesses, people and roles, team email addresses, and an email delivery log.
 
-## 📸 App Previews
+## Quick start (local)
 
-### Admin Dashboard (AI Clustering in Action)
+Requires Node 22+. No Docker or database setup: locally the app runs an embedded Postgres (PGlite) in `./.data/`.
 
-![Admin Dashboard](./assets/dashboard.png)
+```bash
+npm install
+cp .env.example .env.local     # set GEMINI_API_KEY; keep AUTH_DEV_LOGIN=true
+npm run demo:load              # optional: demo staff/students + a dozen real-pipeline reports
+npm run dev
+```
 
-### Student Experience (WhatsApp Bot)
+Open http://localhost:3000 and use the **Developer login** (local only) with any `@dau.ac.in` email. Emails in `ADMIN_EMAILS` become admins. After `demo:load` you can sign in as `admin@`, `it.staff@`, `grievance@`, `student1@` … `student5@dau.ac.in`. In dev, emails are printed to the server console; the admin "Email log" page shows them too.
 
-![WhatsApp Integration](./assets/whatsapp-chat.png)
+## Commands
 
----
+| | |
+|---|---|
+| `npm run dev` | App on :3000 (auto-migrates and seeds the local DB) |
+| `npm test` | Integration tests on an in-memory Postgres: intake, duplicates, permissions, sensitive routing, merges, outbox, escalation |
+| `npm run check` | Typecheck + lint + tests |
+| `npm run eval` | Measure the AI on `fixtures/eval/reports.jsonl`: accuracy, sensitive-report recall, calibration, duplicate thresholds. Needs `GEMINI_API_KEY` |
+| `npm run db:generate` | Create a migration after editing `src/db/schema.ts` |
+| `npm run db:setup` | Migrate + seed the database in `DATABASE_URL` (or the local one) |
+| `npm run db:seed` | Re-apply `src/config/taxonomy.ts` (categories, teams, places) |
+| `npm run export:labels` | Export real reports with their final, human-confirmed labels (training/eval data) |
 
-## 🛠️ Technology Stack & AI Disclosure
+## How it's built
 
-As part of the Buildathon requirements, here is the full disclosure of tools, models, and APIs used in this project:
+```
+src/core/        the product logic, independent of the UI and of any channel
+  intake.ts        analyze → (AI + keyword check + similar issues) → submit / join / "me too"
+  staff.ts         status, assignment, reclassify, merge (all audited, permission-checked)
+  queries.ts       queues and views, with access rules applied in SQL
+  permissions.ts   who can see what, in one place
+  urgency.ts       urgency is a formula over AI-extracted signals, not an AI guess
+  sla.ts           deadlines by urgency
+  notify.ts        transactional outbox: emails are queued with the change and retried
+  jobs.ts          daily escalation + digests
+  ai/              Gemini classifier (model fallbacks, retries) + embeddings; prompt + strict output validation
+src/db/          Drizzle schema, migrations in ./drizzle, taxonomy seeding
+src/config/      taxonomy.ts: teams, categories, campus places  ← finalise with the administration
+src/app/         Next.js pages and server actions (thin: auth check → core → revalidate)
+scripts/         migrate, seed, eval, export-labels, load-demo
+tests/           vitest integration tests (real Postgres via PGlite, fake AI)
+```
 
-- **Frontend & Backend**: [Next.js 15 (App Router)](https://nextjs.org/) with React and TailwindCSS.
-- **Database**: [Vercel KV (Upstash Redis)](https://vercel.com/docs/storage/vercel-kv) for low-latency, persistent edge storage.
-- **Primary AI Model**: [Google Gemini 2.5 Flash API](https://ai.google.dev/). We use Gemini for NLP processing (categorizing, scoring urgency, and generating cluster summaries based on student text).
-- **Communication API**: [Meta WhatsApp Cloud API (v25.0)](https://developers.facebook.com/docs/whatsapp/cloud-api) for receiving webhooks and sending automated replies to students.
-- **Deployment**: [Vercel](https://vercel.com/).
+Key decisions (details in [docs/ProjectDocumentation.md](docs/ProjectDocumentation.md)):
+- **The AI extracts, code decides.** Gemini only picks from fixed lists and reports yes/no signals. Routing, urgency and deadlines are deterministic. Duplicates are suggested and a person confirms them; nothing is merged silently.
+- **It works without the AI.** If Gemini is down, the student picks the category, the report is saved, and staff double-check it.
+- **Real Postgres with pgvector.** Rows are written in transactions and row locks keep counts exact under concurrency.
+- **Channel-agnostic core.** A WhatsApp adapter only needs to call `analyzeReport` / `submitReport`.
+- Model choice and when to revisit it: [docs/ModelSelection.md](docs/ModelSelection.md).
 
----
+## Deploying
 
-## 📦 Running Locally
+See [docs/Deployment.md](docs/Deployment.md). Short version: Vercel (or any Node host) + Postgres with pgvector (Neon or Supabase) + a Google OAuth client restricted to the college Workspace + a **paid** Gemini key + SMTP for email.
 
-1. **Clone the repository**
+## Repository
 
-   ```bash
-   git clone <repo-url>
-   cd dau-pulse
-   ```
-
-2. **Install dependencies**
-
-   ```bash
-   npm install
-   ```
-
-3. **Set up Environment Variables**
-   Create a `.env` file in the root directory:
-
-   ```env
-   # Database (Vercel KV)
-   KV_REST_API_URL=your_upstash_url
-   KV_REST_API_TOKEN=your_upstash_token
-
-   # Meta WhatsApp API
-   WHATSAPP_ACCESS_TOKEN=your_meta_token
-   WHATSAPP_PHONE_NUMBER_ID=your_phone_id
-   WHATSAPP_VERIFY_TOKEN=dau_pulse_secret_token
-
-   # Google Gemini
-   GEMINI_API_KEY=your_gemini_api_key
-   ```
-
-4. **Run the development server**
-   ```bash
-   npm run dev
-   ```
-   Open `http://localhost:3000` in your browser.
-
----
-
-## 📂 Project Structure
-
-- `src/app/api/webhook/route.ts`: Core WhatsApp webhook receiver and processing pipeline.
-- `src/lib/ai.ts`: Gemini LLM prompt engineering and clustering logic.
-- `src/app/admin/page.tsx`: Administrator dashboard UI.
-- `Blog.md`: Our team's story and vision.
-- `docs/ProjectDocumentation.md`: Detailed architectural documentation.
+- **`docs/HANDOFF.md`: start here** if you're picking the project up. It covers status, the decision log, next steps and gotchas.
+- `Blog.md`: the buildathon story.
+- `assets/`: screenshots of the buildathon prototype.
