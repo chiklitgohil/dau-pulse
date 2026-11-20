@@ -1,42 +1,61 @@
 {
   "name": "dau-pulse",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Campus issue reporting, routing and resolution for DAU",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "tsx scripts/migrate.ts",
+    "db:seed": "tsx scripts/seed.ts",
+    "db:setup": "tsx scripts/migrate.ts && tsx scripts/seed.ts",
+    "demo:load": "tsx scripts/load-demo.ts",
+    "eval": "tsx scripts/eval.ts",
+    "export:labels": "tsx scripts/export-labels.ts",
+    "check": "npm run typecheck && npm run lint && npm test"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/chiklitgohil/dau-pulse.git"
   },
-  "keywords": [],
-  "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/chiklitgohil/dau-pulse/issues"
   },
   "homepage": "https://github.com/chiklitgohil/dau-pulse#readme",
   "dependencies": {
-    "@google/genai": "^2.8.0",
-    "@vercel/kv": "^3.0.0",
+    "@electric-sql/pglite": "0.5.17",
+    "@electric-sql/pglite-pgvector": "0.0.18",
+    "@google/genai": "3.6.1",
+    "drizzle-orm": "0.45.4",
     "lucide-react": "^1.20.0",
     "next": "^16.2.9",
+    "next-auth": "5.0.0-beta.32",
+    "nodemailer": "8.0.11",
+    "postgres": "4.1.1",
     "react": "^19.2.7",
-    "react-dom": "^19.2.7"
+    "react-dom": "^19.2.7",
+    "zod": "4.6.7"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.3.1",
     "@types/node": "^25.9.3",
+    "@types/nodemailer": "8.0.2",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
+    "drizzle-kit": "0.31.11",
     "eslint": "^9.39.4",
     "eslint-config-next": "^16.2.9",
     "tailwindcss": "^4.3.1",
-    "typescript": "^6.0.3"
+    "tsx": "4.23.15",
+    "typescript": "^6.0.3",
+    "vitest": "5.1.1"
   }
 }

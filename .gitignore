@@ -36,6 +36,9 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# buildathon specific
+# local data (PGlite database, eval reports)
+.data/
+
+# buildathon specific (old prototype's local data file: may contain real reports)
 notes/
 src/lib/db.json

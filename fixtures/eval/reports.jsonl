@@ -1,0 +1,96 @@
+{"id":"w1","text":"Wi-Fi in Hostel B has been down since last night, can't submit my assignment","category":"it","subcategory":"wifi","location":"hostel-b","sensitive":false,"group":"wifi-hb"}
+{"id":"w2","text":"bhai H-B ka wifi phir se gaya, kal raat se internet nahi chal raha","category":"it","subcategory":"wifi","location":"hostel-b","sensitive":false,"group":"wifi-hb"}
+{"id":"w3","text":"No internet on 2nd floor of hostel B. The router light is red.","category":"it","subcategory":"wifi","location":"hostel-b","sensitive":false,"group":"wifi-hb"}
+{"id":"w4","text":"hostel b wifi not working again!!! third time this week","category":"it","subcategory":"wifi","location":"hostel-b","sensitive":false,"group":"wifi-hb"}
+{"id":"w5","text":"DAU wifi keeps disconnecting in Hostel B block, impossible to attend online class","category":"it","subcategory":"wifi","location":"hostel-b","sensitive":false,"group":"wifi-hb"}
+{"id":"w6","text":"Wifi is very slow in the library reading room since Monday","category":"it","subcategory":"wifi","location":"library","sensitive":false,"group":null}
+{"id":"m1","text":"Mess food was cold and stale at dinner again today","category":"mess","subcategory":"food-quality","location":"mess","sensitive":false,"group":"mess-cold"}
+{"id":"m2","text":"aaj raat mess ka khana bilkul thanda tha aur roti kachi thi","category":"mess","subcategory":"food-quality","location":"mess","sensitive":false,"group":"mess-cold"}
+{"id":"m3","text":"The dinner in the mess is served cold every night, please do something","category":"mess","subcategory":"food-quality","location":"mess","sensitive":false,"group":"mess-cold"}
+{"id":"m4","text":"stale food in hostel mess tonight, many of us skipped dinner","category":"mess","subcategory":"food-quality","location":"mess","sensitive":false,"group":"mess-cold"}
+{"id":"m5","text":"Found a hair in my dal at the cafeteria today. Hygiene is terrible.","category":"mess","subcategory":"food-hygiene","location":"cafeteria","sensitive":false,"group":null}
+{"id":"m6","text":"Canteen charged me 40 rupees for a sandwich that is listed at 30","category":"mess","subcategory":"pricing","location":"cafeteria","sensitive":false,"group":null}
+{"id":"m7","text":"Mess closes breakfast at 8:30 but our classes start at 8, can timings be changed?","category":"mess","subcategory":"timings-menu","location":"mess","sensitive":false,"group":null}
+{"id":"m8","text":"cockroach in the cafe kitchen area, saw it from the counter","category":"mess","subcategory":"food-hygiene","location":"cafeteria","sensitive":false,"group":null}
+{"id":"p1","text":"Projector in LT-2 isn't working, the professor couldn't show slides","category":"maintenance","subcategory":"classroom-equipment","location":"lecture-theatre","sensitive":false,"group":"lt-projector"}
+{"id":"p2","text":"LT 2 projector display flickering and then goes blank","category":"maintenance","subcategory":"classroom-equipment","location":"lecture-theatre","sensitive":false,"group":"lt-projector"}
+{"id":"p3","text":"projector in lecture theatre 2 broken again, third lecture wasted","category":"maintenance","subcategory":"classroom-equipment","location":"lecture-theatre","sensitive":false,"group":"lt-projector"}
+{"id":"h1","text":"No water in Hostel C since morning, can't even use the washrooms","category":"maintenance","subcategory":"water-supply","location":"hostel-c","sensitive":false,"group":"hc-water"}
+{"id":"h2","text":"Hostel C ma savar thi pani nathi aavtu","category":"maintenance","subcategory":"water-supply","location":"hostel-c","sensitive":false,"group":"hc-water"}
+{"id":"h3","text":"water supply cut in H-C, the whole building has no water","category":"maintenance","subcategory":"water-supply","location":"hostel-c","sensitive":false,"group":"hc-water"}
+{"id":"h4","text":"taps are dry in hostel C block since 7am","category":"maintenance","subcategory":"water-supply","location":"hostel-c","sensitive":false,"group":"hc-water"}
+{"id":"h5","text":"The tap in the 3rd floor washroom of Hostel A is leaking continuously","category":"maintenance","subcategory":"plumbing","location":"hostel-a","sensitive":false,"group":null}
+{"id":"h6","text":"Ceiling fan in my room 214 Hostel A makes a loud noise and wobbles","category":"maintenance","subcategory":"electrical","location":"hostel-a","sensitive":false,"group":null}
+{"id":"h7","text":"Tube light in room 118 girls hostel has not worked for a week","category":"maintenance","subcategory":"electrical","location":"girls-hostel","sensitive":false,"group":null}
+{"id":"h8","text":"Exposed electric wires hanging near the switchboard in Hostel B corridor, someone could get a shock","category":"maintenance","subcategory":"electrical","location":"hostel-b","sensitive":false,"group":null}
+{"id":"h9","text":"My room door lock is broken, I can't lock it when I go to class","category":"maintenance","subcategory":"furniture","location":null,"sensitive":false,"group":null}
+{"id":"h10","text":"The lift in the academic block has been stuck on the ground floor for two days","category":"maintenance","subcategory":"lift","location":"academic-block","sensitive":false,"group":null}
+{"id":"h11","text":"Water cooler near the library gives warm water and smells bad","category":"maintenance","subcategory":"water-supply","location":"library","sensitive":false,"group":null}
+{"id":"a1","text":"AC in the library is not working, it's unbearable to sit there","category":"maintenance","subcategory":"ac","location":"library","sensitive":false,"group":"library-ac"}
+{"id":"a2","text":"library ka AC band hai do din se, bahut garmi hai","category":"maintenance","subcategory":"ac","location":"library","sensitive":false,"group":"library-ac"}
+{"id":"a3","text":"Air conditioning in the resource centre is broken","category":"maintenance","subcategory":"ac","location":"library","sensitive":false,"group":"library-ac"}
+{"id":"a4","text":"AC in LT 3 is leaking water on the front benches","category":"maintenance","subcategory":"ac","location":"lecture-theatre","sensitive":false,"group":null}
+{"id":"i1","text":"Can't log in to the student portal, it says invalid credentials but my password is right","category":"it","subcategory":"portal","location":null,"sensitive":false,"group":"portal"}
+{"id":"i2","text":"Portal login not working for anyone in my batch since morning","category":"it","subcategory":"portal","location":null,"sensitive":false,"group":"portal"}
+{"id":"i3","text":"LMS is down, assignment due tonight and we can't upload","category":"it","subcategory":"portal","location":null,"sensitive":false,"group":"portal"}
+{"id":"i4","text":"student portal giving error 500 when I try to sign in","category":"it","subcategory":"portal","location":null,"sensitive":false,"group":"portal"}
+{"id":"i5","text":"Half the computers in lab 3 don't boot, we have a practical exam tomorrow","category":"it","subcategory":"lab-computers","location":"lab-block","sensitive":false,"group":null}
+{"id":"i6","text":"Printer in the library is out of toner since last week","category":"it","subcategory":"printing","location":"library","sensitive":false,"group":null}
+{"id":"i7","text":"MATLAB license expired on the lab machines","category":"it","subcategory":"software","location":"lab-block","sensitive":false,"group":null}
+{"id":"i8","text":"my college email account got locked after password reset","category":"it","subcategory":"portal","location":null,"sensitive":false,"group":null}
+{"id":"s1","text":"The path from the library to the girls' hostel is completely dark at night, street lights are off","category":"security","subcategory":"unsafe-area","location":["campus-roads","girls-hostel","library"],"sensitive":false,"group":"gh-dark"}
+{"id":"s2","text":"street lights near girls hostel road not working, feels unsafe walking back","category":"security","subcategory":"unsafe-area","location":["girls-hostel","campus-roads"],"sensitive":false,"group":"gh-dark"}
+{"id":"s3","text":"Very dark walkway to GH at night, lights have been off for a week","category":"security","subcategory":"unsafe-area","location":["girls-hostel","campus-roads"],"sensitive":false,"group":"gh-dark"}
+{"id":"s4","text":"My cycle was stolen from the hostel parking last night","category":"security","subcategory":"theft","location":"parking","sensitive":false,"group":null}
+{"id":"s5","text":"Guard at the main gate didn't let me in at 10:45 pm even with my ID card","category":"security","subcategory":"entry","location":"main-gate","sensitive":false,"group":null}
+{"id":"s6","text":"Outsiders riding bikes very fast inside campus near the parking","category":"security","subcategory":"parking","location":"parking","sensitive":false,"group":null}
+{"id":"s7","text":"Fire extinguisher in Hostel A 2nd floor expired in 2024","category":"security","subcategory":"fire","location":"hostel-a","sensitive":false,"group":null}
+{"id":"s8","text":"lost my laptop charger in LT-1 yesterday, is there a lost and found?","category":"security","subcategory":"theft","location":"lecture-theatre","sensitive":false,"group":null}
+{"id":"c1","text":"Washrooms on the ground floor of the academic block are filthy and stink","category":"housekeeping","subcategory":"washrooms","location":"academic-block","sensitive":false,"group":"ab-washroom"}
+{"id":"c2","text":"academic block toilets not cleaned for days","category":"housekeeping","subcategory":"washrooms","location":"academic-block","sensitive":false,"group":"ab-washroom"}
+{"id":"c3","text":"The washroom near classroom 101 is very dirty, no soap either","category":"housekeeping","subcategory":"washrooms","location":"academic-block","sensitive":false,"group":"ab-washroom"}
+{"id":"c4","text":"Garbage bins outside Hostel B haven't been emptied, it's overflowing","category":"housekeeping","subcategory":"garbage","location":"hostel-b","sensitive":false,"group":null}
+{"id":"c5","text":"So many mosquitoes in hostel C rooms, please do fogging","category":"housekeeping","subcategory":"pests","location":"hostel-c","sensitive":false,"group":null}
+{"id":"c6","text":"Stray dogs near the cafeteria chasing students at night","category":"housekeeping","subcategory":"animals","location":"cafeteria","sensitive":false,"group":null}
+{"id":"e1","text":"Two mid-sem exams scheduled at the same time on 14th for CS301 and MA202","category":"academic","subcategory":"exams","location":null,"sensitive":false,"group":"exam-clash"}
+{"id":"e2","text":"exam clash on 14th between CS301 and MA202, many of us are in both","category":"academic","subcategory":"exams","location":null,"sensitive":false,"group":"exam-clash"}
+{"id":"e3","text":"CS301 and MA202 midsems both at 10am on the 14th, please reschedule","category":"academic","subcategory":"exams","location":null,"sensitive":false,"group":"exam-clash"}
+{"id":"e4","text":"Our professor for EL204 hasn't shown up for the last three lectures","category":"academic","subcategory":"faculty","location":null,"sensitive":false,"group":null}
+{"id":"e5","text":"Grades for the IT215 quiz are still not uploaded after a month","category":"academic","subcategory":"grades","location":null,"sensitive":false,"group":null}
+{"id":"e6","text":"My attendance is marked absent for days I was present in SC101","category":"academic","subcategory":"attendance","location":null,"sensitive":false,"group":null}
+{"id":"e7","text":"Course registration portal not showing the elective I need to graduate","category":"academic","subcategory":"courses","location":null,"sensitive":false,"group":null}
+{"id":"e8","text":"timetable has two classes at 9am on thursday for section B","category":"academic","subcategory":"timetable","location":null,"sensitive":false,"group":null}
+{"id":"g1","text":"The treadmill in the gym is broken and two dumbbells are missing","category":"sports","subcategory":"equipment","location":"sports-complex","sensitive":false,"group":"gym"}
+{"id":"g2","text":"gym treadmill not working since last week","category":"sports","subcategory":"equipment","location":"sports-complex","sensitive":false,"group":"gym"}
+{"id":"g3","text":"Treadmill in the sports complex gym has an out of order sign for 10 days","category":"sports","subcategory":"equipment","location":"sports-complex","sensitive":false,"group":"gym"}
+{"id":"g4","text":"Basketball court is always booked by the same group, others never get a slot","category":"sports","subcategory":"booking","location":"sports-complex","sensitive":false,"group":null}
+{"id":"g5","text":"badminton court net is torn","category":"sports","subcategory":"equipment","location":"sports-complex","sensitive":false,"group":null}
+{"id":"pl1","text":"The placement cell hasn't shared the shortlist for the Infosys drive yet and interview is tomorrow","category":"placement","subcategory":"interviews","location":null,"sensitive":false,"group":null}
+{"id":"pl2","text":"How do I get the NOC for my summer internship? Nobody replies to emails","category":"placement","subcategory":"internships","location":null,"sensitive":false,"group":null}
+{"id":"pl3","text":"Offer letter from campus drive still not received after 2 months","category":"placement","subcategory":"placements","location":null,"sensitive":false,"group":null}
+{"id":"hl1","text":"The medical centre was closed at 9 pm when my roommate had high fever","category":"health","subcategory":"medical-centre","location":"medical-centre","sensitive":false,"group":null}
+{"id":"hl2","text":"No paracetamol or ORS available at the health centre","category":"health","subcategory":"medicines","location":"medical-centre","sensitive":false,"group":null}
+{"id":"hl3","text":"Is there a counsellor on campus? I've been feeling really stressed and can't sleep","category":"health","subcategory":"mental-health","location":null,"sensitive":false,"group":null}
+{"id":"ho1","text":"I applied for a room change two weeks ago and the hostel office hasn't responded","category":"hostel","subcategory":"allocation","location":null,"sensitive":false,"group":null}
+{"id":"ho2","text":"Laundry service is losing clothes, I've lost 3 shirts this month","category":"hostel","subcategory":"laundry","location":null,"sensitive":false,"group":null}
+{"id":"ho3","text":"Warden is never available in the office during the posted hours","category":"hostel","subcategory":"warden","location":null,"sensitive":false,"group":null}
+{"id":"ho4","text":"Why is the hostel in-time 10:30 for girls and 11:30 for boys? This is unfair","category":"hostel","subcategory":"rules-timings","location":null,"sensitive":false,"group":null}
+{"id":"o1","text":"Can we get more buses to Gandhinagar on weekends?","category":"other","subcategory":"transport","location":null,"sensitive":false,"group":null}
+{"id":"o2","text":"Suggestion: put a water dispenser near the sports complex","category":"other","subcategory":"suggestion","location":"sports-complex","sensitive":false,"group":null}
+{"id":"o3","text":"hello is this working","category":["other",null],"subcategory":null,"location":null,"sensitive":false,"group":null}
+{"id":"x1","text":"Seniors called us first years to their room at 2am and made us do push-ups, said we'd be in trouble if we told anyone","category":"grievance","subcategory":"ragging","location":null,"sensitive":true,"group":null}
+{"id":"x2","text":"I am being ragged by seniors in hostel C, they take my money and threaten me","category":"grievance","subcategory":"ragging","location":"hostel-c","sensitive":true,"group":null}
+{"id":"x3","text":"A TA keeps sending me inappropriate messages late at night and says it will affect my grades if I complain","category":"grievance","subcategory":"harassment","location":null,"sensitive":true,"group":null}
+{"id":"x4","text":"Someone has been following me from the library to my hostel every night this week","category":"grievance","subcategory":"harassment","location":"library","sensitive":true,"group":null}
+{"id":"x5","text":"My roommate and his friends keep mocking my caste and won't let me use the common room","category":"grievance","subcategory":"discrimination","location":null,"sensitive":true,"group":null}
+{"id":"x6","text":"wo log roz mujhe pareshan karte hai aur dhamki dete hai ki kisi ko bataya toh maarenge","category":"grievance","subcategory":"bullying","location":null,"sensitive":true,"group":null}
+{"id":"x7","text":"The mess supervisor touched me inappropriately while I was in the queue","category":"grievance","subcategory":"harassment","location":"mess","sensitive":true,"group":null}
+{"id":"x8","text":"I don't see the point anymore, I want to end my life","category":"grievance","subcategory":"other","location":null,"sensitive":true,"group":null}
+{"id":"x9","text":"Please keep this confidential: a faculty member asked me to come to his house alone to discuss my marks","category":"grievance","subcategory":"harassment","location":null,"sensitive":true,"group":null}
+{"id":"x10","text":"Group of seniors forced juniors to shave heads as a 'tradition' in hostel A","category":"grievance","subcategory":"ragging","location":"hostel-a","sensitive":true,"group":null}
+{"id":"f1","text":"This Wi-Fi is killing me, it's slower than a snail in Hostel A","category":"it","subcategory":"wifi","location":"hostel-a","sensitive":false,"group":null}
+{"id":"f2","text":"The security guard was rude to me at the gate when I asked for directions","category":"security","subcategory":"entry","location":"main-gate","sensitive":false,"group":null}
+{"id":"f3","text":"Fight broke out in the cafeteria over a table, nobody was hurt but it was chaotic","category":["security","grievance"],"subcategory":null,"location":"cafeteria","sensitive":false,"group":null}
+{"id":"f4","text":"The AC in the admin block accounts office is dripping water near the electrical panel","category":"maintenance","subcategory":"ac","location":"admin-block","sensitive":false,"group":null}
+{"id":"f5","text":"Gas smell near the cafeteria kitchen since the morning","category":["mess","maintenance","security"],"subcategory":"food-hygiene","location":"cafeteria","sensitive":false,"group":null}
+{"id":"f6","text":"broken glass on the path to the sports complex, someone will get hurt","category":"housekeeping","subcategory":"common-areas","location":"sports-complex","sensitive":false,"group":null}
